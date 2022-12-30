@@ -25,6 +25,7 @@ if($result->num_rows > 0){
             "location" => $description,
 			"established" => $price		
         ); 
+       //$itemDetails = array_map('utf8_encode', $itemDetails); 
        array_push($itemRecords["items"], $itemDetails);
     }    
     http_response_code(200);     

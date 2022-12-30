@@ -11,8 +11,6 @@ $db = $database->getConnection();
  
 $items = new Farms($db);
 
-//$items->id = (isset($_GET['id']) && $_GET['id']) ? $_GET['id'] : '0';
-
 $result = $items->readAll();
 
 if($result->num_rows > 0){    
@@ -30,7 +28,7 @@ if($result->num_rows > 0){
         $itemDetails = array_map('utf8_encode', $itemDetails);
         array_push($itemRecords, $itemDetails);
     }    
-    http_response_code(200);    
+    http_response_code(200);   
     echo  json_encode($itemRecords);
 }else{     
     http_response_code(404);     

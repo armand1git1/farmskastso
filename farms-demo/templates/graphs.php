@@ -29,7 +29,7 @@
       <div class="input-field col s6" style="width:50px; background-color: #59922b">&nbsp;</div>
 
       <div class="input-field col s6" style="width:210px">     
-        <a title="See my location" target="_blank" href="<?php if(isset($link_farms_Friman)) echo $link_farms_Friman; ?>" style="font-weight: bold; color:#000;text-decoration: underline">          
+        <a title="See my location" target="_blank" href="#" style="font-weight: bold; color:#000;text-decoration: underline">          
               Friman Metsola Collective
         </a>      
         
@@ -39,21 +39,21 @@
 
       <div class="input-field col s6" style="width:50px; margin-left:20px; background-color: #f05b4f">&nbsp;</div>
       <div class="input-field col s6" style="width:180px">  
-        <a title="See my location" target="_blank" href="<?php if(isset($link_farms_PartialTech)) echo $link_farms_PartialTech; ?>" style="font-weight: bold; color:#000;text-decoration: underline">          
+        <a title="See my location" target="_blank" href="#" style="font-weight: bold; color:#000;text-decoration: underline">          
               PartialTech Research         
         </a>      
       </div>
 
       <div class="input-field col s6" style="width:50px; margin-left:20px; background-color: #f4c63d">&nbsp;</div>
       <div class="input-field col s6" style="width:30px">      
-        <a title="See my location" target="_blank" href="<?php if(isset($link_farms_Noora)) echo  $link_farms_Noora; ?>" style="font-weight: bold; color:#000;text-decoration: underline">          
+        <a title="See my location" target="_blank" href="#" style="font-weight: bold; color:#000;text-decoration: underline">          
           Noora
         </a>  
       </div>
 
       <div class="input-field col s6" style="width:50px; margin-left:50px; background-color: #d2691e">&nbsp;</div>
       <div class="input-field col s6" style="width:190px">      
-        <a  title="See my location" target="_blank" href="<?php if(isset($link_farms_Organic)) echo $link_farms_Organic; ?>" style="font-weight: bold; color:#000;text-decoration: underline">          
+        <a  title="See my location" target="_blank" href="#" style="font-weight: bold; color:#000;text-decoration: underline">          
           Organic Ossi's Impact
         </a>
       </div>
@@ -70,12 +70,12 @@
   <script src="bower_components/chartist/dist/chartist.js"></script>
    <script>
    
-
+   
 
 // passing php data to javascript code 
  var data1  = <?php echo json_encode($test_data_label1, JSON_HEX_TAG); ?>; // months x (axis)
- var data2  = <?php echo json_encode($test_data_serie1, JSON_HEX_TAG); ?>; // numbers y (axis)
- var origin = <?php echo json_encode($test_data_low1, JSON_HEX_TAG); ?>;   // origin of the graph
+ var data2  = <?php echo json_encode($testDataSerie, JSON_HEX_TAG); ?>; // numbers y (axis)
+ var origin = <?php echo json_encode($testDataLow, JSON_HEX_TAG); ?>;   // origin of the graph
 
 
 

@@ -13,16 +13,16 @@ $global['admin_pages']            = array('admin','users','settings');
 $global['time_offset']            = 0;
 //local 
 
-$global['api_url']                = "http://127.0.0.1";
+$global['api_url']                = "http://localhost/farmskatso/farmskastso/backend-farmsDemo/";
 
-$global['api_url']                = "http://site.walkap.net/backend-farmDemo";
+// $global['api_url']                = "http://site.walkap.net/backend-farmDemo";
 
 
 //$global['api_url']                = "http://127.0.0.1:8080";
 // Online 
 //$global['api_url']              = "http://84.249.7.85";
 
-$global['google_maps_keys']       ="AIzaSyBc2tnDO_myHclHAvgxQUmvTwSdPJnpWDU";
+// $global['google_maps_keys']       ="AIzaSyBc2tnDO_myHclHAvgxQUmvTwSdPJnpWDU";
 
 // directory settings
 define('CORE_DIR', './core/');

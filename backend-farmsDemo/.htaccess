@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+    Options +FollowSymLinks
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d    	
+	RewriteRule http://localhost/farmskatso/farmskastso/backend-farmsDemo/farmsStats/read/farms/1/sensor/(.*)$  http://localhost/farmskatso/farmskastso/backend-farmsDemo/farmsStats/read.php?farmsId=1&sensor=rainfall [QSA,NC,L]
+</IfModule>

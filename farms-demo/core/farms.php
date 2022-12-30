@@ -27,11 +27,11 @@
   
 
       // Search farms based sensor type 
-     if (isset($_POST["farm_detail_id"]) && isset($_POST["btn_sentortype"])) 
-     {    
-      if(isset($_POST["sensor_type"])) {
-      $sensor_type                = $_POST["sensor_type"];  // get sensor posted
-      }
+      if (isset($_POST["farm_detail_id"]) && isset($_POST["btn_sentortype"])) 
+      {    
+        if(isset($_POST["sensor_type"])) {
+        $sensor_type                = $_POST["sensor_type"];  // get sensor posted
+        }
      }        
       // Everything
       //$info_farms_details         = CallAPI("GET", "",$global['api_url']."/v1/farms/".$myfamr_index."/stats");  // get all farms stats 
@@ -165,27 +165,13 @@
  default:
 
 
- //farms infos  
- //$myfarms_details            = CallAPI("GET", "",$global['api_url']."/v1/farms/".$myfamr_index."");  // My farms details
 
+  $listAllFarms  = Array();
 
- //backend-farmDemo/farms_stats/read
- // $farmsList            = CallAPI("GET", "",$global['api_url']."/php classes/examples/rest-api-php-mysql/farms_stats/read");  // My farms details
- /* 
-  $farmsList            = CallAPI("GET", "",$global['api_url']."/farms_stats/read");  // My farms details
-  echo $global['api_url']."/backend-farmDemo/farms_stats/read";
-  print_r($farmsList);
-  die();
-  */
-  
+  //echo $global['api_url']."farms/read";
 
-  $list_all_farms  = Array();
-
-  //$list_all_farms  = CallAPI("GET", "",$global['api_url']."/v1/farms");  // get all farms list
-  
-
-  $list_all_farms  = CallAPI("GET", "",$global['api_url']."/farms/readAll");  // get all farms list
-
+  // getting all farms  
+  $listAllFarms  = CallAPI("GET", "",$global['api_url']."farms/read");  // get all farms list
   
 
 }

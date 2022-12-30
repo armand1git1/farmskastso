@@ -12,13 +12,22 @@ $items = new FarmsStats($db);
 
 $items->id = (isset($_GET['id']) && $_GET['id']) ? $_GET['id'] : '0';
 
-$result = $items->read();
+//$items->farms_id    = (isset($_GET['farms_stats']) && $_GET['farms_stats']) ? $_GET['farms_stats'] : null;
+//$items->sensor_type = (isset($_GET['sensorType']) && $_GET['sensorType']) ? $_GET['sensorType'] : null;
+
+$result = $items->readFarmMonthly();
+
+//print_r($result);
+//die();
+
+//$result = $items->read();
 
 if($result->num_rows > 0){    
     $itemRecords=array();
     $itemRecords["farms_stats"]=array(); 
 	while ($item = $result->fetch_assoc()) { 	
         extract($item); 
+        
         $itemDetails=array(
             "id" => $id,
             "farms_id" => $farms_id,
@@ -29,6 +38,8 @@ if($result->num_rows > 0){
             "median" => $median,
             "median" => $standard_deviation			
         ); 
+       
+      
        array_push($itemRecords["farms_stats"], $itemDetails);
     }    
     http_response_code(200);     

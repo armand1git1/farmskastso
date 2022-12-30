@@ -10,29 +10,9 @@
 
 <div class="row">
 <div id="div_1" class="container">
- <form action="" method="post" name="search_trans">
+ <form action="" method="post" name="list_farms">
 
-   <?php if(isset($_SESSION['error_transaction']) && (!empty($_SESSION['error_transaction']) && ($_SESSION['error_transaction']==TRUE)))                   {   
-  ?>
-       <table width="70%" style="margin-left: 70px ">
-       
-        <?php if(isset($_SESSION['error_transaction']) && $_SESSION['error_transaction']==TRUE) {  ?>
-        <tr>
-          <td class="text" style="height:3px" width="200" align="center" colspan="4" bgcolor="#26a69a">
-            <label  class="darktext" > <?php if (isset($tab_value['details7'])) echo $tab_value['details7'];?>  </label>
-          </td>
-        </tr>
-     <?php  
-       if (isset($_SESSION['error_transaction'])) unset($_SESSION['error_transaction']);
-      }  
-      ?>
-      </table>
-  <?php }  ?>
-
-
-
-
-
+ 
   	<h5 class="header center boutique section-title">List of farms</h5>
   
 
@@ -68,12 +48,12 @@
     <?php
          
      // list of farms
-     if (isset($list_all_farms)) // Checking if the array exists and contains value
+     if (isset($listAllFarms)) // Checking if the array exists and contains value
      {      
 
       
      $i=0;     
-        foreach ($list_all_farms as $farms) 
+        foreach ($listAllFarms as $farms) 
         {                     
           $style="height: 5px; background-color: #D3D3D3";    
           $result1 =($i % 2);
@@ -81,12 +61,12 @@
           $my_id    =0;   
           if(isset($farms->id)) $my_id  = $farms->id; 
        
-          $link_farm_details=$link_farms."&action=details"."&view=".base64_encode($my_id); 
-          $link_farm_location=$link_farms."&action=location"."&view=".base64_encode($my_id); 
+          $linkFarmDetails=$link_farms."&action=details"."&view=".base64_encode($my_id); 
+          $linkFarmLocation=$link_farms."&action=location"."&view=".base64_encode($my_id); 
     ?>
       <tr style="<?php if (isset($style)) echo $style; ?> ">
         <td style="height:3px; border-radius:0px;" width="50" colspan="1">
-          <a title="click to have statistics" href="<?php echo $link_farm_details; ?>" style="font-weight: bold; color:#000;text-decoration: underline">
+          <a title="click to have statistics" href="<?php echo $linkFarmDetails; ?>" style="font-weight: bold; color:#000;text-decoration: underline">
           <strong>
            <?php 
               $prefix    ='1000000'; 
@@ -108,19 +88,21 @@
         </td>
 
         <td style="align:right">
-         <a title="See my location" href="<?php if(isset($link_farm_location)) echo $link_farm_location; ?>" style="font-weight: bold; color:#000;text-decoration: underline">
-            <?php
-                 if (isset($farms->location)) echo $farms->location; 
-            ?>       
-         </a>           
+          <b>
+            <?php if (isset($farms->location)) echo $farms->location; ?>       
+            </b>  
         </td>
 
 
+         
         <td style="align:left"> 
-         <a title="See my location" href="<?php if(isset($link_farm_location)) echo $link_farm_location; ?>" style="font-weight: bold; color:#000;text-decoration: underline">
+        <!--
+         <a title="See my location" href="<?php if(isset($linkFarmLocation)) echo $linkFarmLocation; ?>" style="font-weight: bold; color:#000;text-decoration: underline">
           <img  title="My location" width="25" height="20"  src="images/location_icon_nobg.png"/>
          </a>
+            -->
         </td>
+            
 
         <td>
          <?php 
@@ -146,7 +128,7 @@
        </tr>
 
         <?php    
-        echo $i++;      
+         $i++;      
       }        
     } 
    ?>
