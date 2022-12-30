@@ -28,67 +28,16 @@ function nbr_month_2dates($date1, $date2) {
     $date1_month      = $arr_explode_date[1];
   }
 
-  //echo $date2_month; echo "=="; echo $date1_month; 
   
   $year_diff         = ($date2_year -  $date1_year)*12;
   $month_diff        = ($date2_month + $year_diff) - $date1_month;      
 
-  // diff between years  
-  //echo $date2_year; echo "=="; echo $date1_year;
-  //echo "2 dates";
-  // to continue 
+ 
   return $month_diff;
 }
 
-// Checking if there is session and destroy it 
-function unset_all_redirect(){
-   
- //if(isset($_SESSION['login_id']))   unset($_SESSION['login_id']);
- if ((!isset($_SESSION['login_id'])) || (isset($_SESSION['login_id']) && $_SESSION['login_id']==NULL))
- {
-  //session_unset();
-  //session_destroy();
-  // redirectTo('index.php?lang=en');      
- }  
-}
-
- /* Password encryption using hash function */
-function pass_encrypt($value1,$option_size)
-{
- $options    = ['cost' => $option_size,];
- $hash_value = password_hash($value1, PASSWORD_BCRYPT, $options);  // using bcrypt function 
- return $hash_value;
-} 
-
- /* Password hash key verification  */
-function pass_verify($value1,$encrypted_value)
-{
- $result     = FALSE;  
- $result     = password_verify($value1, $encrypted_value);  // check
- return $result;
-} 
 
 
- 
- /* Select max pk  */
-function max_pk($table, $table_id)
-{
-   $rq      ="select MAX(".$table_id.") as max_pk FROM ".$table."";   // query   
-  /*
-  $result  = mysql_query($rq);
-  $row     = mysql_fetch_row($result);
-  $highest_id = $row[0];
-  */
-  $arr      = funcQuery($rq);   
-  $max_pk   = 10001;  // minumun pk_id 
-
-
-  if (isset($arr[0]["max_pk"]) && ($arr[0]["max_pk"]>1))
-  {    
-    $max_pk =   (int)($arr[0]["max_pk"])+1; 
-  }  
- return($max_pk); 
-}
 
 
 
@@ -159,177 +108,8 @@ function return_current_url($lang,$actual_link="",$module_new="")
  return $actual_link; 
 }
 
-// Treat xml file
-function get_array_xml($file)
-{
- $xml                  = Array(); 
- if (isset($file))
- {
-   $index_menu       =strpos($file,"menu");                      // checking if the file name contains the character "lss_menu"  
-   if ((isset($index_menu) && $index_menu!==FALSE))     $indice  ="menu";  
-    
-   $index_index      =strpos($file,"index");                      // checking if the file name contains the character "lss_menu"  
-   if ((isset($index_index) && $index_index!==FALSE))   $indice  ="index";  
-                     
-   if(file_exists($file) && filesize($file)>0)                      // if file exits and the file's size is more than zero 
-   {    
-    $xml = simplexml_load_file($file);       
-   }            
- }
-
- return($xml);
-}
 
 
-// select data cond one                  
-function select_all($table,$order=" transaction_date ",$order_cond=0) 
-{ 
- $table  =$table;   
- $arr    =Array();        // Initialize my array  
- $rq     ="select *from $table ";   // query   
- 
- if ($order_cond=1){
-  if (trim($order)!="")  $rq .=" order by ".$order." asc";      
- }
- else{
-  if (trim($order)!="")  $rq .=" order by ".$order." desc";       
- } 
- 
- $arr =funcQuery($rq);  // return new value of the arry  
- return $arr;
-} 
-
-// select data cond one     
-  // $table : table name              
-  // $attr  : table attribut              
-  // $val1  : value of the attribut 
-  // $cond  : if we want to specify the order of the sorting or not  
-  // $order : attribut used for the order
-function select_cond_one($table,$attr,$val1,$cond=0,$order="") 
-{ 
- $table  =$table;   
- $arr    =Array();        // Initialize my array  
- $rq     ="select *from $table where $table.$attr='$val1'";   // query    
- if ($cond==2){ $rq .=" order by ".$order." asc";}
- if ($cond==3){ $rq .=" order by ".$order." desc";}
-
- $arr =funcQuery($rq);  // return new value of the array  
- return $arr;
-}                                                       
-
-// select data cond two                  
-function select_cond_two($table,$attr1,$attr2,$val1,$val2,$cond=0,$order='$attr1') 
-{ 
- $table  =$table;   
- $arr    =Array();        // Initialize my array  
- $rq     ="select *from $table where $table.$attr1='$val1' and $table.$attr2='$val2'";   // query   
- 
- if ($cond==0)
- {
- $rq .=" order by $order asc";      
- }   
- 
- $arr =funcQuery($rq);  // return new value of the arry  
- return $arr;
-}          
-
-                   
-
- function pagination($query,$page=1)
- {
-  //case 1 : the categorie is not specified, we select Field1,Field2,Field3  
-  if ((!isset($categorie))  or (isset($categorie) && $categorie==""))
-  {                
-  $currentPage               = $_SERVER["PHP_SELF"];             //  Current page 
-  $currentPage               = "index.php?";
-  $maxrows                   = 7;                                //  maximun of ligns of information that will be displayed     
-  
-  $arr_list                  = Array(); 
- 
-  $result1                   = dbQuery($query);
-  $total_row                 = db_num_rows($result1);         
-  $startRow                  = 0;   
-  if($page>1) $startRow      = (($page-1) * $maxrows);    // This information allows to the query to know his limitation          
-  
-  $query_limited             = sprintf("%s LIMIT %d, %d",$query,$startRow,$maxrows); // If the starts rows is 0, we will search to 0   to 7,                                 
-                               
-  $totalPages                = ceil($total_row/$maxrows);    
-  $queryString               = "";
-  if (!empty($_SERVER['QUERY_STRING']))
-  {
-   $params = explode("&", $_SERVER['QUERY_STRING']);
-   $newParams = array();
-   foreach ($params as $param) 
-   {
-    if (stristr($param, "pg") == false && stristr($param, "totalRows") == false)
-    {
-      array_push($newParams, $param);
-    }
-   }
-   if (count($newParams) != 0) 
-   {
-    $queryString             = htmlentities(implode("&", $newParams));
-   }
-  }
-  $currentPage              .= $queryString;;
-  $queryString               = sprintf("&totalRows=%d%s", $total_row, $queryString);
-    
-  $tab        =Array();   
-  
-  $tab['query_result']       = $query_limited;  
-  $tab['pageNum']            = $page;
-  $tab['currentPage']        = $currentPage;
-  $tab['queryString']        = $queryString;
-  $tab['totalPages']         = $totalPages;
-
-  return($tab);   
-  }         
- }          
- 
- function error_mail($str)        // is empty
- {
-  $a=FALSE;       
-   if (preg_match("/^([a-zA-Z0-9-])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", trim($str))) $a=TRUE;
-  return $a;
- }
-
- function error_empty($str)       // is empty
- {
-  $a                         = TRUE;             
-  if (trim($str)=="")   $a   = FALSE;       
-  return $a;
- }
- 
- function error_number($str)      // is number 
- {  
-  // Removing white spaces from string
-  $str = str_replace(' ', '', $str); 
-  return (preg_match('/^[0-9]*$/', $str)) ? TRUE : FALSE;
- }
- 
- function germanNameTitle($str)
- {
-   return (preg_match("/^[\w\s�������',\)\(\.\-]+$/", $str)) ? TRUE : FALSE;
- }
- 
- function valAdress($str)         // is address
- {         
-   //return (preg_match("/^[a-zA-Z0-9�������'\/\-\. ]+ +[0-9]+(|[a-z\/\-\.])+$/", $str)) ? TRUE : FALSE;    
-   //return (preg_match("/^[a-zA-Z0-9���������'.,()\/\-\. ]+$/", $str)) ? TRUE : FALSE;    
-   return (preg_match("/^[a-zA-Z0-9���������'.,()\/\-\. ]+$/", $str)) ? TRUE : FALSE;    
- }
- 
- function isurl($str)           // is url 
- {
-   $c = parse_url($str);
-   if(is_array($c)){return $c;}else{return FALSE;}
- }
- 
- function isbase64($str)
- {  
-  //return (preg_match("/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$/", trim($str))) ? TRUE : FALSE;  
-  return ( base64_encode(base64_decode($str)) ===$str) ? TRUE : FALSE;  
- }  
  
  function ip2long1($ip, $getVersion = TRUE)
  {
@@ -422,15 +202,6 @@ function getRealIpAddr()
     return $ip;
 }  
  
- function msg_error()            //msg for email error
- {
- echo"<div style='background-color:#FF0000;width:900px;align:left;'>&nbsp;<strong class='normaltext'>Error : Please give your appreciation to questions by checking button radio and fill textboxes with valid data.</strong></div><br />";
- }                                 
- 
- function msg_appr()            //msg for approving email
- {
- echo"<div style='background-color:#71C671;width:900px;align:left;'>&nbsp;<strong class='text'>Thank you. Your information has been collected.</strong></div><br />";
- } 
 
 
 function format_calendar_date($date_posted) {

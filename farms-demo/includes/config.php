@@ -22,7 +22,6 @@ $global['api_url']                = "http://localhost/farmskatso/farmskastso/bac
 // Online 
 //$global['api_url']              = "http://84.249.7.85";
 
-// $global['google_maps_keys']       ="AIzaSyBc2tnDO_myHclHAvgxQUmvTwSdPJnpWDU";
 
 // directory settings
 define('CORE_DIR', './core/');

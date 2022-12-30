@@ -33,19 +33,6 @@ function CallAPI($method, $token, $url, $data = [])
     }
 }
 
-function check_auth($username, $password)
-{
-  global $global;
-  $token = base64_encode($username.":".$password);
-
-  //echo $global['api_url']."/accounts/".$username; echo "=="; echo "$token"; 
-
-  $req_check_auth = CallAPI("GET", $token, $global['api_url']."/accounts/".$username);
-  return ! empty($req_check_auth);
-}
-
-
-
 
 ?>
 
