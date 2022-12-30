@@ -32,8 +32,7 @@ class FarmsStats{
 	
 
 	function readFarmMonthly(){	
-	  if($this->farmsId!==null && $this->sensorType!==null) {
-
+	  if( $this->sensorType!==null) {
 		$year = 2021;
 		$stmt = $this->conn->prepare("SELECT * FROM ".$this->itemsTable." WHERE  sensor_type='". $this->sensorType . "'"." and year='". $year  ."'"." order by farms_id, month ASC");
 		$stmt->execute();			

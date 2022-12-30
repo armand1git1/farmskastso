@@ -1,5 +1,7 @@
 # farmskastso
 
+Demo Link : http://site.walkap.net/farms-demo/?lang=en&module=graphs
+
 - Usage: 
 The apps serve as a decisional tool for farmers around Finland, It shows analytics about: rainfall, temperature, ph of the ground during the past year so that predictions can be made for the next year. 
 
