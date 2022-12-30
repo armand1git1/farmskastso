@@ -15,25 +15,24 @@ $items = new Items($db);
  
 $data = json_decode(file_get_contents("php://input"));
 
-if(!empty($data->name) && !empty($data->description) &&
-!empty($data->price) && !empty($data->category_id) &&
-!empty($data->created)){    
+
+
+if(!empty($data->name) && !empty($data->location) &&
+!empty($data->established)){    
 
     $items->name = $data->name;
-    $items->description = $data->description;
-    $items->price = $data->price;
-    $items->category_id = $data->category_id;	
-    $items->created = date('Y-m-d H:i:s'); 
-    
+    $items->location = $data->location;
+    $items->established = $data->established;
+      
     if($items->create()){         
         http_response_code(201);         
-        echo json_encode(array("message" => "Item was created."));
+        echo json_encode(array("message" => "Farm was created."));
     } else{         
         http_response_code(503);        
-        echo json_encode(array("message" => "Unable to create item."));
+        echo json_encode(array("message" => "Unable to create Farm."));
     }
 }else{    
     http_response_code(400);    
-    echo json_encode(array("message" => "Unable to create item. Data is incomplete."));
+    echo json_encode(array("message" => "Unable to create Farm. Data is incomplete."));
 }
 ?>

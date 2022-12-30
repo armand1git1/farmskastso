@@ -15,28 +15,26 @@ $items = new Items($db);
  
 $data = json_decode(file_get_contents("php://input"));
 
+
+
 if(!empty($data->id) && !empty($data->name) && 
-!empty($data->description) && !empty($data->price) && 
-!empty($data->category_id)){ 
+!empty($data->location) && !empty($data->established)){ 
 	
 	$items->id = $data->id; 
 	$items->name = $data->name;
-    $items->description = $data->description;
-    $items->price = $data->price;
-    $items->category_id = $data->category_id;	
-    $items->created = date('Y-m-d H:i:s'); 
-	
+    $items->description = $data->location;
+    $items->price = $data->established; 
 	
 	if($items->update()){     
 		http_response_code(200);   
-		echo json_encode(array("message" => "Item was updated."));
+		echo json_encode(array("message" => "Farm was updated."));
 	}else{    
 		http_response_code(503);     
-		echo json_encode(array("message" => "Unable to update items."));
+		echo json_encode(array("message" => "Unable to update Farm."));
 	}
 	
 } else {
 	http_response_code(400);    
-    echo json_encode(array("message" => "Unable to update items. Data is incomplete."));
+    echo json_encode(array("message" => "Unable to update Farm. Data is incomplete."));
 }
 ?>

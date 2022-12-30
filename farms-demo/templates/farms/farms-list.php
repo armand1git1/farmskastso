@@ -50,11 +50,11 @@
      // list of farms
      if (isset($listAllFarms)) // Checking if the array exists and contains value
      {      
-
-      
+   
      $i=0;     
         foreach ($listAllFarms as $farms) 
-        {                     
+        {                 
+          
           $style="height: 5px; background-color: #D3D3D3";    
           $result1 =($i % 2);
           if ($result1==True)       $style  ="height: 5px; background-color: #FFFFFF"; 

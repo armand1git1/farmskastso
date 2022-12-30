@@ -12,15 +12,8 @@ $items = new FarmsStats($db);
 
 $items->id = (isset($_GET['id']) && $_GET['id']) ? $_GET['id'] : '0';
 
-//$items->farms_id    = (isset($_GET['farms_stats']) && $_GET['farms_stats']) ? $_GET['farms_stats'] : null;
-//$items->sensor_type = (isset($_GET['sensorType']) && $_GET['sensorType']) ? $_GET['sensorType'] : null;
 
 $result = $items->readFarmMonthly();
-
-//print_r($result);
-//die();
-
-//$result = $items->read();
 
 if($result->num_rows > 0){    
     $itemRecords=array();
@@ -36,7 +29,7 @@ if($result->num_rows > 0){
             "year" => $year,            
 			"average" => $average,
             "median" => $median,
-            "median" => $standard_deviation			
+            "standard_deviation" => $standard_deviation			
         ); 
        
       

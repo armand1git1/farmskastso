@@ -25,15 +25,7 @@ class Farms{
 	}
 
 
-	function readAll(){			
-		
-		$stmt = $this->conn->prepare("SELECT * FROM ".$this->itemsTable."");			
-			
-		$stmt->execute();			
-		$result = $stmt->get_result();		
-		return $result;	
-	}
-	
+
 	function create(){
 		
 		$stmt = $this->conn->prepare("

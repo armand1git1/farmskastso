@@ -16,17 +16,16 @@ $result = $items->read();
 
 if($result->num_rows > 0){    
     $itemRecords=array();
-    $itemRecords["items"]=array(); 
 	while ($item = $result->fetch_assoc()) { 	
         extract($item); 
         $itemDetails=array(
             "id" => $id,
             "name" => $name,
-            "location" => $description,
-			"established" => $price		
+            "location" =>  $location,
+			"established" => $established		
         ); 
-       //$itemDetails = array_map('utf8_encode', $itemDetails); 
-       array_push($itemRecords["items"], $itemDetails);
+        $itemDetails = array_map('utf8_encode', $itemDetails);
+       array_push($itemRecords, $itemDetails);
     }    
     http_response_code(200);     
     echo json_encode($itemRecords);

@@ -19,13 +19,13 @@ if(!empty($data->id)) {
 	$items->id = $data->id;
 	if($items->delete()){    
 		http_response_code(200); 
-		echo json_encode(array("message" => "Item was deleted."));
+		echo json_encode(array("message" => "Farm was deleted."));
 	} else {    
 		http_response_code(503);   
-		echo json_encode(array("message" => "Unable to delete item."));
+		echo json_encode(array("message" => "Unable to delete Farm."));
 	}
 } else {
 	http_response_code(400);    
-    echo json_encode(array("message" => "Unable to delete items. Data is incomplete."));
+    echo json_encode(array("message" => "Unable to delete Farm. Data is incomplete."));
 }
 ?>
